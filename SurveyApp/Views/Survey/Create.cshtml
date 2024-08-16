@@ -1,0 +1,39 @@
+@{
+    ViewData["Title"] = "Create a new survey";
+}
+
+<form class="pure-form pure-form-stacked content">
+    <fieldset name="control-buttons">
+        <div class="pure-g" style="align-items: center;">
+            <div class="pure-u-1-5">
+                <button id="add-new-question" type="button" class="pure-u-23-24 pure-button pure-button-primary">Add a
+                    new
+                    question</button>
+            </div>
+            <div class="pure-u-1-8">
+                <input id="num-of-choices" placeholder="No. of choices" class="pure-u-23-24" type="number" min="2"
+                    max="5" />
+            </div>
+
+        </div>
+    </fieldset>
+    <fieldset name="questions">
+
+    </fieldset>
+</form>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#add-new-question").click(function () {
+                var template = $("#new-question").clone()
+                $("fieldset[name='questions']").append(template.html());
+            });
+        });
+    </script>
+}
+
+
+<template id="new-question">
+    <textarea class="pure-input-1" placeholder="Enter your question here"></textarea>
+</template>
