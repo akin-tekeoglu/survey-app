@@ -3,18 +3,13 @@
 }
 
 <form class="pure-form pure-form-stacked content">
-    <fieldset name="control-buttons">
-        <div class="pure-g" style="align-items: center;">
-            <div class="pure-u-1-5">
+    <fieldset>
+        <div class="pure-g">
+            <div class="pure-u-3-24">
                 <button id="add-new-question" type="button" class="pure-u-23-24 pure-button pure-button-primary">Add a
                     new
                     question</button>
             </div>
-            <div class="pure-u-1-8">
-                <input id="num-of-choices" placeholder="No. of choices" class="pure-u-23-24" type="number" min="2"
-                    max="5" />
-            </div>
-
         </div>
     </fieldset>
     <fieldset name="questions">
@@ -26,8 +21,11 @@
     <script>
         $(document).ready(function () {
             $("#add-new-question").click(function () {
-                var template = $("#new-question").clone()
-                $("fieldset[name='questions']").append(template.html());
+                const questions = $("fieldset[name='questions']");
+                const length = $("fieldset[name='questions'] fieldset").length
+                questions.append($("#new-question").clone().html())
+                const question = questions.find("fieldset").last();
+                question.find("label").first().text(`Question-${length + 1}`)
             });
         });
     </script>
@@ -35,5 +33,31 @@
 
 
 <template id="new-question">
-    <textarea class="pure-input-1" placeholder="Enter your question here"></textarea>
+    <fieldset class="pure-group">
+        <hr>
+        <label></label>
+        <textarea class="pure-input-1" style="margin-bottom: 1em;" placeholder="Enter your question here"></textarea>
+        <div class="pure-g">
+            <div class="pure-u-1-5">
+                <label>1.</label>
+                <textarea class="pure-input-4-5" placeholder="Enter your choice here"></textarea>
+            </div>
+            <div class="pure-u-1-5">
+                <label>2.</label>
+                <textarea class="pure-input-4-5" placeholder="Enter your choice here"></textarea>
+            </div>
+            <div class="pure-u-1-5">
+                <label>3.</label>
+                <textarea class="pure-input-4-5" placeholder="Enter your choice here"></textarea>
+            </div>
+            <div class="pure-u-1-5">
+                <label>4.</label>
+                <textarea class="pure-input-4-5" placeholder="Enter your choice here"></textarea>
+            </div>
+            <div class="pure-u-1-5">
+                <label>5.</label>
+                <textarea class="pure-input-4-5" placeholder="Enter your choice here"></textarea>
+            </div>
+        </div>
+    </fieldset>
 </template>
