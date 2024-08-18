@@ -1,0 +1,44 @@
+@model SurveyApp.Models.Survey
+@{
+    ViewData["Title"] = "Create a new survey";
+}
+
+<form action="/survey" method="post" class="pure-form pure-form-stacked content">
+    <label>Survey title</label>
+    <input type="text" name="title" required />
+    <fieldset name="questions">
+        @for (var i = 0; i < 10; i++)
+        {
+            <fieldset class="pure-group">
+                <label>Question-@(i + 1)</label>
+                <textarea name="questions[@(i)][value]" class="pure-input-1" style="margin-bottom: 1em;"></textarea>
+                <div class="pure-g">
+                    <div class="pure-u-1-5">
+                        <label>1.</label>
+                        <textarea name="questions[@(i)][choices][0]" class="pure-input-4-5"></textarea>
+                    </div>
+                    <div class="pure-u-1-5">
+                        <label>2.</label>
+                        <textarea name="questions[@(i)][choices][1]" class="pure-input-4-5"></textarea>
+                    </div>
+                    <div class="pure-u-1-5">
+                        <label>3.</label>
+                        <textarea name="questions[@(i)][choices][2]" class="pure-input-4-5"></textarea>
+                    </div>
+                    <div class="pure-u-1-5">
+                        <label>4.</label>
+                        <textarea name="questions[@(i)][choices][3]" class="pure-input-4-5"></textarea>
+                    </div>
+                    <div class="pure-u-1-5">
+                        <label>5.</label>
+                        <textarea name="questions[@(i)][choices][4]" class="pure-input-4-5"></textarea>
+                    </div>
+                </div>
+            </fieldset>
+        }
+    </fieldset>
+    <fieldset name="buttons">
+        <button type="submit" class="pure-button pure-button-primary">Save</button>
+        <a href="/" class="pure-button">Cancel</a>
+    </fieldset>
+</form>
