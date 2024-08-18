@@ -9,7 +9,7 @@ public class SurveyController : Controller
 {
     public IActionResult Index()
     {
-        return View();
+        return View(new Survey("",[]));
     }
 
     [HttpPost("/survey")]
@@ -18,17 +18,21 @@ public class SurveyController : Controller
         var questions = survey.Questions.Where(x =>
              !string.IsNullOrWhiteSpace(x.Value)
         ).Select(x =>
-            new Question(x.Value, x.Choices.Where(y => !string.IsNullOrWhiteSpace(y)))
+            new Question(x.Value, x.Choices.Where(y => !string.IsNullOrWhiteSpace(y)).ToList())
         ).ToList();
-        var cleanSurvey = new Survey(survey.Title,questions);
-        if(TryValidateModel(cleanSurvey))
+        
+        var cleanSurvey = new Survey(survey.Title, questions);
+        ModelState.Clear();
+        if (TryValidateModel(cleanSurvey))
         {
             return Redirect("/survey");
-        }else{
-            // TODO redirect with error‰
-            return Redirect("/survey");
         }
-        
-        
+        else
+        {
+            return View("Index", cleanSurvey);
+        }
+
+
+
     }
 }

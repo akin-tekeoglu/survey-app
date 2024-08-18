@@ -2,10 +2,11 @@
 @{
     ViewData["Title"] = "Create a new survey";
 }
+@Html.ValidationSummary()
 
 <form action="/survey" method="post" class="pure-form pure-form-stacked content">
     <label>Survey title</label>
-    <input type="text" name="title" required />
+    <input type="text" name="title" value="@Model.Title" required />
     <fieldset name="questions">
         @for (var i = 0; i < 10; i++)
         {
@@ -15,7 +16,9 @@
                 <div class="pure-g">
                     <div class="pure-u-1-5">
                         <label>1.</label>
-                        <textarea name="questions[@(i)][choices][0]" class="pure-input-4-5"></textarea>
+                        <textarea name="questions[@(i)][choices][0]" class="pure-input-4-5">
+                            @Model.Questions[i].Choices[0]
+                        </textarea>
                     </div>
                     <div class="pure-u-1-5">
                         <label>2.</label>
