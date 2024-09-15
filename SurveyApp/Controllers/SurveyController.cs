@@ -9,7 +9,8 @@ public class SurveyController : Controller
 {
     public IActionResult Index()
     {
-        return View(new Survey("",[]));
+        var questions=Enumerable.Repeat(new Question("", Enumerable.Repeat("",5).ToList()),10).ToList();
+        return View(new Survey("",questions));
     }
 
     [HttpPost("/survey")]

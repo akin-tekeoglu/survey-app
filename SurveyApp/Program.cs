@@ -1,7 +1,11 @@
+using Microsoft.AspNetCore.Mvc.Razor;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddLocalization();
+builder.Services.AddControllersWithViews()
+ .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix);
 
 var app = builder.Build();
 

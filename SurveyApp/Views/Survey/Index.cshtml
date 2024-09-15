@@ -1,47 +1,84 @@
 @model SurveyApp.Models.Survey
-@{
-    ViewData["Title"] = "Create a new survey";
-}
-@Html.ValidationSummary()
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 
-<form action="/survey" method="post" class="pure-form pure-form-stacked content">
-    <label>Survey title</label>
-    <input type="text" name="title" value="@Model.Title" required />
-    <fieldset name="questions">
+@{
+    ViewData["Title"] = Localizer["Create a new survey"];
+}
+@if (!ViewData.ModelState.IsValid)
+{
+        <article class="message is-danger">
+        <div class="message-header">
+            <p>Danger</p>
+            <button class="delete" aria-label="delete"></button>
+        </div>
+        <div class="message-body">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta nec
+            nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus
+            diam, et dictum <a>felis venenatis</a> efficitur. Aenean ac
+            <em>eleifend lacus</em>, in mollis lectus. Donec sodales, arcu et
+            sollicitudin porttitor, tortor urna tempor ligula, id porttitor mi magna a
+            neque. Donec dui urna, vehicula et sem eget, facilisis sodales sem.
+        </div>
+        </article>
+}
+
+
+<div class="section">
+    <form action="/survey" method="post">
+        <div class="field">
+            <label class="label">@Localizer["Title"]</label>
+            <div class="control">
+                <input name="title" class="input" type="text">
+            </div>
+        </div>
         @for (var i = 0; i < 10; i++)
         {
-            <fieldset class="pure-group">
-                <label>Question-@(i + 1)</label>
-                <textarea name="questions[@(i)][value]" class="pure-input-1" style="margin-bottom: 1em;"></textarea>
-                <div class="pure-g">
-                    <div class="pure-u-1-5">
-                        <label>1.</label>
-                        <textarea name="questions[@(i)][choices][0]" class="pure-input-4-5">
-                            @Model.Questions[i].Choices[0]
-                        </textarea>
-                    </div>
-                    <div class="pure-u-1-5">
-                        <label>2.</label>
-                        <textarea name="questions[@(i)][choices][1]" class="pure-input-4-5"></textarea>
-                    </div>
-                    <div class="pure-u-1-5">
-                        <label>3.</label>
-                        <textarea name="questions[@(i)][choices][2]" class="pure-input-4-5"></textarea>
-                    </div>
-                    <div class="pure-u-1-5">
-                        <label>4.</label>
-                        <textarea name="questions[@(i)][choices][3]" class="pure-input-4-5"></textarea>
-                    </div>
-                    <div class="pure-u-1-5">
-                        <label>5.</label>
-                        <textarea name="questions[@(i)][choices][4]" class="pure-input-4-5"></textarea>
+            <div class="box">
+                <div class="field">
+                    <label class="label">@Localizer[$"Question {i + 1}"]</label>
+                    <div class="control">
+                        <textarea name="questions[@(i)][value]" class="textarea">@Model.Questions[i].Value</textarea>
                     </div>
                 </div>
-            </fieldset>
+                <div class="field">
+                    <label class="label">@Localizer["1"]</label>
+                    <div class="control">
+                        <input name="questions[@(i)][choices][0]" class="input" type="text"
+                            value="@Model.Questions[i].Choices[0]">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">@Localizer["2"]</label>
+                    <div class="control">
+                        <input name="questions[@(i)][choices][1]" class="input" type="text"
+                            value="@Model.Questions[i].Choices[1]">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">@Localizer["3"]</label>
+                    <div class="control">
+                        <input name="questions[@(i)][choices][2]" class="input" type="text"
+                            value="@Model.Questions[i].Choices[2]">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">@Localizer["4"]</label>
+                    <div class="control">
+                        <input name="questions[@(i)][choices][3]" class="input" type="text"
+                            value="@Model.Questions[i].Choices[3]">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">@Localizer["5"]</label>
+                    <div class="control">
+                        <input name="questions[@(i)][choices][4]" class="input" type="text"
+                            value="@Model.Questions[i].Choices[4]">
+                    </div>
+                </div>
+            </div>
         }
-    </fieldset>
-    <fieldset name="buttons">
-        <button type="submit" class="pure-button pure-button-primary">Save</button>
-        <a href="/" class="pure-button">Cancel</a>
-    </fieldset>
-</form>
+
+    </form>
+</div>

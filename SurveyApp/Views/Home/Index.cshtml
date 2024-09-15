@@ -1,10 +1,32 @@
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = Localizer["Home Page"];
 }
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
 
 
-<div class="pure-g content">
-    <div class="pure-u-1">
-        <a class="pure-button pure-button-primary" href="/survey">Create a survey</a>
+<div class="container">
+    <div class="level">
+        <div class="level-left">
+            <div class="level-item">
+                <h1 class="title">@Localizer["Surveys"]</h1>
+            </div>
+        </div>
+        <div class="level-right">
+            <div class="level-item">
+                <a href="/survey" class="button is-link is-primary">@Localizer["Create survey"]</a>
+            </div>
+        </div>
     </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Localizer["Title"]</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
 </div>
